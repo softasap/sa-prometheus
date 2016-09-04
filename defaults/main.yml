@@ -1,0 +1,23 @@
+---
+# defaults file for sa-prometheus
+
+role_dir: "{{role_path}}"
+
+option_install_go: true
+go_version: 1.6
+
+
+prometheus_user:   prometheus
+prometheus_group:  prometheus
+
+prometheus_base_dir: /opt/prometheus
+
+prometheus_version:                 1.1.0
+prometheus_node_exporter_version:   0.12.0
+prometheus_alertmanager_version:    0.3.0
+
+prometheus_config_path:          /etc/prometheus
+prometheus_rule_path:            "{{ prometheus_config_path }}/rules"
+prometheus_file_sd_config_path:  "{{ prometheus_config_path }}/tgroups"
+
+prometheus_rules: []

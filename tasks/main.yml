@@ -1,0 +1,26 @@
+---
+# tasks file for sa-prometheus
+  - include: use/__detect_init_system.yml
+
+  - incude: tasks_go.yml
+    when: option_install_go
+
+  - name: Prometheus | create group
+    group: name={{ prometheus_group }}  state=present
+    become: yes
+    tags:
+      - prometheus
+
+  - name: Prometheus | create user
+    user: name="{{ prometheus_user }}" group="{{ prometheus_group }}" createhome=no shell=/sbin/nologin comment="Prometheus User"  state=present
+    become: yes
+    tags:
+      - prometheus
+
+  - name: Prometheus | Create base dir
+    file: path="{{prometheus_base_dir}}"  state=directory  owner="{{ prometheus_user }}"  group="{{ prometheus_group }}"   mode="u=rwx,g=rx,o="
+    become: yes
+    tags:
+      - prometheus
+
+  - include: tasks_prometheus_server.yml

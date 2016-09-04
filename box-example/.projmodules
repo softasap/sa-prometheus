@@ -1,0 +1,9 @@
+[submodule "roles/sa-grafana"]
+        path = roles/sa-grafana
+        url = https://github.com/softasap/sa-grafana.git
+[submodule "roles/sa-prometheus"]
+        path = roles/sa-prometheus
+        url = https://github.com/softasap/sa-prometheus.git
+[submodule "roles/sa-nginx"]
+        path = roles/sa-nginx
+        url = https://github.com/softasap/sa-nginx.git

@@ -1,0 +1,7 @@
+# Run prometheus service
+
+start on startup
+
+script
+   {{prometheus_base_dir}}/server/prometheus -config.file={{prometheus_config_path}}/prometheus.yml
+end script

@@ -1,0 +1,9 @@
+[Unit]
+Description=Prometheus Main Service
+
+[Service]
+User={{prometheus_user}}
+ExecStart={{prometheus_base_dir}}/server/prometheus -config.file={{prometheus_config_path}}/prometheus.yml
+
+[Install]
+WantedBy=default.target

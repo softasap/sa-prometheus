@@ -1,0 +1,23 @@
+---
+
+# https://github.com/prometheus/node_exporter/releases/download/0.12.0/node_exporter-0.12.0.linux-amd64.tar.gz
+  - name: Prometheus Node Exporter | Download distribution
+    get_url:
+      url: "https://github.com/prometheus/node_exporter/releases/download/{{prometheus_node_exporter_version}}/node_exporter-{{prometheus_node_exporter_version}}.linux-amd64.tar.gz"
+      dest: "{{prometheus_base_dir}}/node_exporter-{{prometheus_node_exporter_version}}.linux-amd64.tar.gz"
+    become: yes
+    become_user: "{{ prometheus_user }}"
+    tags:
+      - prometheus
+
+  - name: Prometheus Node Exporter | unpack distribution
+    shell: "tar -xvzf node_exporter-{{prometheus_node_exporter_version}}.linux-amd64.tar.gz"
+    become: yes
+    tags:
+      - prometheus
+
+  - name: Prometheus Node Exporter | link node exporter dir
+    file: src="{{prometheus_base_dir}}/node_exporter-{{prometheus_node_exporter_version}}.linux-amd64" dest="{{prometheus_base_dir}}/node_exporter" owner="{{ prometheus_user }}"  group="{{ prometheus_group }}" state=link
+    become: yes
+    tags:
+      - prometheus

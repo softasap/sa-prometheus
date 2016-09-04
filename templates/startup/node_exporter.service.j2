@@ -1,0 +1,9 @@
+[Unit]
+Description=Prometheus Node Exporter
+
+[Service]
+User={{prometheus_user}}
+ExecStart={{prometheus_base_dir}}/node_exporter
+
+[Install]
+WantedBy=default.target
