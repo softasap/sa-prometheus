@@ -35,3 +35,13 @@ roles:
 
 ```
 
+
+Best cookied with Grafana (example included in box example , see related article on  https://www.digitalocean.com/community/tutorials/how-to-add-a-prometheus-dashboard-to-grafana)
+
+![alt tag](https://raw.githubusercontent.com/softasap/sa-prometheus/master/box-example/docs/Selection_011.png)
+
+![alt tag](https://raw.githubusercontent.com/softasap/sa-prometheus/master/box-example/docs/Selection_012.png)
+
+![alt tag](https://raw.githubusercontent.com/softasap/sa-prometheus/master/box-example/docs/Selection_013.png)
+
+![alt tag](https://raw.githubusercontent.com/softasap/sa-prometheus/master/box-example/docs/Selection_014.png)
