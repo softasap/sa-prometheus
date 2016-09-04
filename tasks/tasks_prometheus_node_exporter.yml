@@ -12,6 +12,8 @@
 
   - name: Prometheus Node Exporter | unpack distribution
     shell: "tar -xvzf node_exporter-{{prometheus_node_exporter_version}}.linux-amd64.tar.gz"
+    args:
+      chdir: "{{prometheus_base_dir}}"
     become: yes
     tags:
       - prometheus

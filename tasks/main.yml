@@ -2,7 +2,7 @@
 # tasks file for sa-prometheus
   - include: use/__detect_init_system.yml
 
-  - incude: tasks_go.yml
+  - include: tasks_go.yml
     when: option_install_go
 
   - name: Prometheus | create group
