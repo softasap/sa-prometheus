@@ -41,7 +41,7 @@
       - prometheus
 
   - name: Prometheus | Template upstart
-    template: src="{{role_dir}}/templates/startup/server.config.j2" dest="/etc/init/prometheus.conf"
+    template: src="{{role_dir}}/templates/startup/server.conf.j2" dest="/etc/init/prometheus.conf"
     when: upstart_system == "upstart"
     become: yes
     tags:
