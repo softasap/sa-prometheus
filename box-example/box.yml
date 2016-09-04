@@ -24,8 +24,12 @@
 
     - debug: msg="Tasks section"
 
-    - template: src="{{root_dir}}/templates/nginx.conf.j2" dest="/etc/nginx/sites-enabled/grafana"
+    - template: src="{{root_dir}}/templates/grafana.conf.j2" dest="/etc/nginx/sites-enabled/grafana"
       become: yes
+
+    - template: src="{{root_dir}}/templates/prometheus.conf.j2" dest="/etc/nginx/sites-enabled/prometheus"
+      become: yes
+
 
     - service: name="nginx" state="restarted"
       become: yes
