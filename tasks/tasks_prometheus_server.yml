@@ -12,6 +12,8 @@
 
   - name: Prometheus Server | unpack distribution
     shell: "tar -xvzf prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
+    args:
+      chdir: "{{prometheus_base_dir}}"    
     become: yes
     tags:
       - prometheus

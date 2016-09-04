@@ -18,7 +18,6 @@ $BOX_PWD
 
 verbose 4
 set box_address $BOX_ADDRESS
-set graylog_domain 192.168.0.21
 
 provision $BOX_NAME
 EOF
