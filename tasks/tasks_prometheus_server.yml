@@ -6,7 +6,6 @@
       url: "https://github.com/prometheus/prometheus/releases/download/v{{prometheus_version}}/prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
       dest: "{{prometheus_base_dir}}/prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
     become: yes
-    become_user: "{{ prometheus_user }}"
     tags:
       - prometheus
 
