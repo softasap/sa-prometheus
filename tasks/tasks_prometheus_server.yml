@@ -12,7 +12,7 @@
   - name: Prometheus Server | unpack distribution
     shell: "tar -xvzf prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
     args:
-      chdir: "{{prometheus_base_dir}}"    
+      chdir: "{{prometheus_base_dir}}"
     become: yes
     tags:
       - prometheus
@@ -30,6 +30,14 @@
       - "{{prometheus_config_path}}"
       - "{{prometheus_rule_path}}"
       - "{{prometheus_file_sd_config_path}}"
+    tags:
+      - prometheus
+
+  - name: Prometheus | Create data dirs
+    file: path="{{item}}"  state=directory  owner="root"  group="{{ prometheus_group }}"   mode="u=rwx,g=rwx,o="
+    become: yes
+    with_items:
+      - "{{prometheus_data_dir}}"
     tags:
       - prometheus
 

@@ -3,5 +3,5 @@
 start on startup
 
 script
-   {{prometheus_base_dir}}/server/prometheus -config.file={{prometheus_config_path}}/prometheus.yml
+   {{prometheus_base_dir}}/server/prometheus --config.file={{prometheus_config_path}}/prometheus.yml --storage.tsdb.path={{prometheus_data_dir}} {{prometheus_extra_startup_params}}
 end script
