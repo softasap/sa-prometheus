@@ -29,7 +29,23 @@ vars:
 
 roles:
   - {
-      role: "sa-prometheus"
+      role: "sa-prometheus",
+
+      option_install_go: true,
+      go_version: 1.6,
+
+
+      prometheus_user:   prometheus,
+      prometheus_group:  prometheus,
+
+      prometheus_base_dir: /opt/prometheus,
+      prometheus_data_dir: "{{prometheus_base_dir}}/data",
+
+      prometheus_version:                 2.0.0,
+      prometheus_node_exporter_version:   0.15.2,
+      prometheus_alertmanager_version:    0.11.0,
+
+      prometheus_config_path:          /etc/prometheus
     }
 
 
@@ -58,20 +74,20 @@ https://www.digitalocean.com/community/tutorials/how-to-query-prometheus-on-ubun
 usage with ansible-galaxy workflow
 ----------------------------------
 
-If you installed the `sa-postgres` role using the command
+If you installed the `sa-prometheus` role using the command
 
 
 `
-   ansible-galaxy install softasap.sa-postgres
+   ansible-galaxy install softasap.sa-prometheus
 `
 
-the role will be available in the folder `library/softasap.sa-postgres`
+the role will be available in the folder `library/softasap.sa-prometheus`
 Please adjust the path accordingly.
 
 ```YAML
 
      - {
-         role: "softasap.sa-postgres"
+         role: "softasap.sa-prometheus"
        }
 
 ```
