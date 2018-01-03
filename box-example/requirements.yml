@@ -1,0 +1,6 @@
+- src: softasap.sa-nginx
+  name: sa-nginx
+- src: softasap.sa-grafana
+  name: sa-grafana
+- src: softasap.sa-prometheus
+  name: sa-prometheus
