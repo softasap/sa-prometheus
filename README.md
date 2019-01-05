@@ -39,7 +39,7 @@ roles:
       prometheus_group:  prometheus,
 
       prometheus_base_dir: /opt/prometheus,
-      prometheus_data_dir: "{{prometheus_base_dir}}/data",
+      prometheus_data_dir: "{{ prometheus_base_dir }}/data",
 
       prometheus_version:                 2.0.0,
       prometheus_node_exporter_version:   0.15.2,

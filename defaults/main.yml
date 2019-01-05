@@ -11,11 +11,11 @@ prometheus_user:   prometheus
 prometheus_group:  prometheus
 
 prometheus_base_dir: /opt/prometheus
-prometheus_data_dir: "{{prometheus_base_dir}}/data"
+prometheus_data_dir: "{{ prometheus_base_dir }}/data"
 
-prometheus_version:                 2.0.0
-prometheus_node_exporter_version:   0.15.2
-prometheus_alertmanager_version:    0.11.0
+prometheus_version:                 2.6.0
+prometheus_node_exporter_version:   0.17.0
+prometheus_alertmanager_version:    0.15.3
 
 prometheus_config_path:          /etc/prometheus
 prometheus_rule_path:            "{{ prometheus_config_path }}/rules"
@@ -25,3 +25,5 @@ prometheus_file_sd_config_path:  "{{ prometheus_config_path }}/tgroups"
 prometheus_extra_startup_params: ""
 
 prometheus_rules: []
+
+prometheus_dist_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
