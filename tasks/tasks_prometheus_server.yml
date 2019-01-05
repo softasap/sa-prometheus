@@ -3,59 +3,66 @@
 # https://github.com/prometheus/prometheus/releases/download/v1.1.0/prometheus-1.1.0.linux-amd64.tar.gz
   - name: Prometheus Server | Download distribution
     get_url:
-      url: "https://github.com/prometheus/prometheus/releases/download/v{{prometheus_version}}/prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
-      dest: "{{prometheus_base_dir}}/prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
+      url: "{{ prometheus_dist_url }}"
+      dest: "{{ prometheus_base_dir }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
     become: yes
     tags:
       - prometheus
+      - skip_ansible_lint
 
   - name: Prometheus Server | unpack distribution
-    shell: "tar -xvzf prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
+    shell: "tar -xvzf prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
     args:
-      chdir: "{{prometheus_base_dir}}"
+      chdir: "{{ prometheus_base_dir }}"
     become: yes
     tags:
       - prometheus
+      - skip_ansible_lint
 
   - name: Prometheus Server | link server dir
-    file: src="{{prometheus_base_dir}}/prometheus-{{prometheus_version}}.linux-amd64" dest="{{prometheus_base_dir}}/server" owner="{{ prometheus_user }}"  group="{{ prometheus_group }}" state=link
+    file:
+      src: "{{ prometheus_base_dir }}/prometheus-{{ prometheus_version }}.linux-amd64"
+      dest: "{{ prometheus_base_dir }}/server"
+      owner: "{{ prometheus_user }}"
+      group: "{{ prometheus_group }}"
+      state: link
     become: yes
     tags:
       - prometheus
 
   - name: Prometheus | Create config dir
-    file: path="{{item}}"  state=directory  owner="root"  group="{{ prometheus_group }}"   mode="u=rwx,g=rx,o="
+    file: path="{{ item }}"  state=directory  owner="root"  group="{{ prometheus_group }}"   mode="u=rwx,g=rx,o="
     become: yes
     with_items:
-      - "{{prometheus_config_path}}"
-      - "{{prometheus_rule_path}}"
-      - "{{prometheus_file_sd_config_path}}"
+      - "{{ prometheus_config_path }}"
+      - "{{ prometheus_rule_path }}"
+      - "{{ prometheus_file_sd_config_path }}"
     tags:
       - prometheus
 
   - name: Prometheus | Create data dirs
-    file: path="{{item}}"  state=directory  owner="root"  group="{{ prometheus_group }}"   mode="u=rwx,g=rwx,o="
+    file: path="{{ item }}"  state=directory  owner="root"  group="{{ prometheus_group }}"   mode="u=rwx,g=rwx,o="
     become: yes
     with_items:
-      - "{{prometheus_data_dir}}"
+      - "{{ prometheus_data_dir }}"
     tags:
       - prometheus
 
   - name: Prometheus | Template main prometheus config
-    template: src="{{role_dir}}/templates/server/prometheus.yml.j2" dest="{{prometheus_config_path}}/prometheus.yml"
+    template: src="{{ role_dir }}/templates/server/prometheus.yml.j2" dest="{{ prometheus_config_path }}/prometheus.yml"
     become: yes
     tags:
       - prometheus
 
   - name: Prometheus | Template upstart
-    template: src="{{role_dir}}/templates/startup/server.conf.j2" dest="/etc/init/prometheus.conf"
+    template: src="{{ role_dir }}/templates/startup/server.conf.j2" dest="/etc/init/prometheus.conf"
     when: upstart_system == "upstart"
     become: yes
     tags:
       - prometheus
 
   - name: Prometheus | Template systemd
-    template: src="{{role_dir}}/templates/startup/server.service.j2" dest="/etc/systemd/system/prometheus.service"
+    template: src="{{ role_dir }}/templates/startup/server.service.j2" dest="/etc/systemd/system/prometheus.service"
     when: upstart_system == "systemd"
     become: yes
     tags:

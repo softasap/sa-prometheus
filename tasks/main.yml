@@ -2,7 +2,7 @@
 # tasks file for sa-prometheus
   - include: use/__detect_init_system.yml
 
-  - include: tasks_go.yml
+  - include: sa-go/main.yml
     when: option_install_go
 
   - name: Prometheus | create group
@@ -12,13 +12,24 @@
       - prometheus
 
   - name: Prometheus | create user
-    user: name="{{ prometheus_user }}" group="{{ prometheus_group }}" createhome=no shell=/sbin/nologin comment="Prometheus User"  state=present
+    user:
+      name: "{{ prometheus_user }}"
+      group: "{{ prometheus_group }}"
+      createhome: no
+      shell: /sbin/nologin
+      comment: "Prometheus User"
+      state: present
     become: yes
     tags:
       - prometheus
 
   - name: Prometheus | Create base dir
-    file: path="{{prometheus_base_dir}}"  state=directory  owner="{{ prometheus_user }}"  group="{{ prometheus_group }}"   mode="u=rwx,g=rx,o="
+    file:
+      path: "{{ prometheus_base_dir }}"
+      state: directory
+      owner: "{{ prometheus_user }}"
+      group: "{{ prometheus_group }}"
+      mode: "u=rwx,g=rx,o="
     become: yes
     tags:
       - prometheus
