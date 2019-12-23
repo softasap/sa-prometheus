@@ -6,11 +6,12 @@ wget  https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_V
 tar -xf prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz
 sudo chown -R {{ prometheus_user }}:root {{ prometheus_base_dir }}/prometheus-${PROMETHEUS_VERSION}.linux-amd64
 sudo service prometheus stop
-rm -rf /opt/prometheus/old
-mv /opt/prometheus/server /opt/prometheus/old
+rm -rf {{ prometheus_base_dir }}/old
+mv {{ prometheus_base_dir }}/server {{ prometheus_base_dir }}/old
 #             Source                                  Link
 sudo ln -f -s {{ prometheus_base_dir }}/prometheus-${PROMETHEUS_VERSION}.linux-amd64 {{ prometheus_base_dir }}/server
-cp /opt/prometheus/old/prometheus.yml /opt/prometheus/server
-cp -r /opt/prometheus/old/rules /opt/prometheus/server
-cp -r /opt/prometheus/old/targets /opt/prometheus/server
+cp {{ prometheus_base_dir }}/server/prometheus.yml {{ prometheus_base_dir }}/server/prometheus.yml.bak
+cp {{ prometheus_base_dir }}/old/prometheus.yml {{ prometheus_base_dir }}/server
+cp -r {{ prometheus_base_dir }}/old/rules {{ prometheus_base_dir }}/server || true
+cp -r {{ prometheus_base_dir }}/old/targets {{ prometheus_base_dir }}/server "" true
 sudo service prometheus start
