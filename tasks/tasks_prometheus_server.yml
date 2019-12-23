@@ -68,6 +68,17 @@
     tags:
       - prometheus
 
+  - name: Prometheus | Template upgrade script
+    template:
+       src: "{{ role_dir }}/templates/upgrade.sh.j2"
+       dest: "{{ prometheus_base_dir }}/upgrade.sh"
+       owner: root
+       group: root
+       mode: "u=rwx,g=rx"
+    become: yes
+    tags:
+      - prometheus
+
   - name:  Prometheus | Start the service
     service: name="prometheus" state="restarted" enabled="yes"
     when: docker_test is not defined
