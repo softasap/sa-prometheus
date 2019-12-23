@@ -16,9 +16,9 @@ prometheus_exporters_dir: "{{prometheus_base_dir}}/exporters"
 prometheus_exporters_config_dir: /etc/prometheus/exporters
 
 
-prometheus_version:                 2.7.1
-prometheus_node_exporter_version:   0.17.0
-prometheus_alertmanager_version:    0.16.1
+prometheus_version:                 "2.14.0"
+prometheus_node_exporter_version:   "0.18.1"
+prometheus_alertmanager_version:    "0.20.0"
 
 prometheus_config_path:          /etc/prometheus
 prometheus_rule_path:            "{{ prometheus_config_path }}/rules"
