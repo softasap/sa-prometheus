@@ -3,7 +3,7 @@
 
 role_dir: "{{role_path}}"
 
-option_install_go: true
+option_install_go: false
 go_version: 1.6
 
 

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PROMETHEUS_VERSION="{{ prometheus_version }}"
+cd {{ prometheus_base_dir }}
+wget  https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz
+tar -xf prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz
+sudo chown -R {{ prometheus_user }}:root {{ prometheus_base_dir }}/prometheus-${PROMETHEUS_VERSION}.linux-amd64
+sudo service prometheus stop
+rm -rf /opt/prometheus/old
+mv /opt/prometheus/server /opt/prometheus/old
+#             Source                                  Link
+sudo ln -f -s {{ prometheus_base_dir }}/prometheus-${PROMETHEUS_VERSION}.linux-amd64 {{ prometheus_base_dir }}/server
+cp /opt/prometheus/old/prometheus.yml /opt/prometheus/server
+cp -r /opt/prometheus/old/rules /opt/prometheus/server
+cp -r /opt/prometheus/old/targets /opt/prometheus/server
+sudo service prometheus start
