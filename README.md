@@ -6,6 +6,10 @@
 
 #Usage:
 
+## Architecture overview
+
+![](docs/architecture.svg)
+
 Simple:
 
 ```YAML
