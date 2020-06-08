@@ -1,0 +1,9 @@
+# ---
+# - targets:
+#     - 192.168.2.2:9100
+#   labels:
+#     instance: box2:9100
+#     env: staging
+#     name: box2.fqdn
+
+# Note, for some dashboards , like https://github.com/rfrail3/grafana-dashboards having port is important

@@ -75,6 +75,16 @@ https://www.digitalocean.com/community/tutorials/how-to-query-prometheus-on-ubun
 https://www.digitalocean.com/community/tutorials/how-to-query-prometheus-on-ubuntu-14-04-part-2
 
 
+Misc hints
+----------
+
+Top 10 metrics stored in db at a moment
+
+```
+topk(10, count by (__name__)({__name__=~".+"}))
+```
+
+
 usage with ansible-galaxy workflow
 ----------------------------------
 

@@ -1,0 +1,7 @@
+# ---
+# - targets:
+#     - 192.168.2.2:9187
+#   labels:
+#     instance: box2
+#     env: staging
+#     name: box2.fqdn
